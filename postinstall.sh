@@ -11,19 +11,6 @@ DB_USER="zammad"
 DB_HOST="localhost"
 MY_CNF="/etc/mysql/debian.cnf"
 
-# check which init system is used
-if [ -n "$(which initctl)" ]; then
-    INIT_CMD="initctl"
-elif [ -n "$(which systemctl)" ]; then
-    INIT_CMD="systemctl"
-else
-    function sysvinit () {
-	service $2 $1
-    }
-    INIT_CMD="sysvinit"
-fi
-
-
 # check if database.yml exists
 if [ -f ${ZAMMAD_DIR}/database.yml ]; then
     # db migration
