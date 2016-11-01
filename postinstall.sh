@@ -36,7 +36,7 @@ else
     else
 	echo -n "Please enter your MySQL root password:"
 	read -s MYSQL_ROOT_PASS
-	MYSQL_CREDENTIALS="-u root -p${MYSQL_ROT_PASS}"
+	MYSQL_CREDENTIALS="-u root -p${MYSQL_ROOT_PASS}"
     fi
     
     echo "creating zammad mysql user and db"
