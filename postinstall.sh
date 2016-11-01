@@ -26,9 +26,15 @@ else
 	read -s MYSQL_ROOT_PASS
 	MYSQL_CREDENTIALS="-u root -p${MYSQL_ROOT_PASS}"
     fi
-    
-    echo "creating zammad mysql user and db"
-    mysql ${MYSQL_CREDENTIALS} -e "CREATE USER '${DB_USER}'@'${DB_HOST}' IDENTIFIED BY '${DB_PASS}';CREATE DATABASE '${DB}' DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci; GRANT ALL PRIVILEGES ON ${DB}.* TO '${DB_USER}'@'${DB_HOST}'; FLUSH PRIVILEGES;"
+
+    echo "creating zammad mysql db"
+    mysql ${MYSQL_CREDENTIALS} -e "CREATE DATABASE \"${DB}\" DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;"
+
+    echo "creating zammad mysql user "
+    mysql ${MYSQL_CREDENTIALS} -e "CREATE USER \"${DB_USER}\"@\"${DB_HOST}\" IDENTIFIED BY \"${DB_PASS}\";"
+
+    echo "grant privileges to new mysql user"
+    mysql ${MYSQL_CREDENTIALS} -e "GRANT ALL PRIVILEGES ON \"${DB}\".* TO \"${DB_USER}\"@\"${DB_HOST}\"; FLUSH PRIVILEGES;"
 
     # update configfile
     sed "s/.*password:.*/  password: ${DB_PASS}/" < ${ZAMMAD_MYSQL_DIR}/database.mysql > ${ZAMMAD_MYSQL_DIR}/database.yml
