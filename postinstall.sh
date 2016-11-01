@@ -6,6 +6,7 @@
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:
 
 ZAMMAD_DIR="/opt/zammad"
+ZAMMAD_MYSQL_DIR="/opt/zammad-mysql"
 DB="zammad_production"
 DB_USER="zammad"
 DB_HOST="localhost"
@@ -30,5 +31,5 @@ else
     mysql ${MYSQL_CREDENTIALS} -e "CREATE USER '${DB_USER}'@'${DB_HOST}' IDENTIFIED BY '${DB_PASS}';CREATE DATABASE '${DB}' DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci; GRANT ALL PRIVILEGES ON ${DB}.* TO '${DB_USER}'@'${DB_HOST}'; FLUSH PRIVILEGES;"
 
     # update configfile
-    sed "s/.*password:.*/  password: ${DB_PASS}/" < ${ZAMMAD_DIR}/database.mysql > ${ZAMMAD_DIR}/database.yml
+    sed "s/.*password:.*/  password: ${DB_PASS}/" < ${ZAMMAD_MYSQL_DIR}/database.mysql > ${ZAMMAD_MYSQL_DIR}/database.yml
 fi
