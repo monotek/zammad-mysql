@@ -5,7 +5,7 @@
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:
 
-ZAMMAD_DIR="/opt/zammad-mysql"
+ZAMMAD_DIR="/opt/zammad"
 DB="zammad_production"
 DB_USER="zammad"
 DB_HOST="localhost"
