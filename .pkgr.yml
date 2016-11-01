@@ -2,6 +2,7 @@ name: zammad-mysql
 description: zammad-mysql
 cli: false
 notifications: false
+default_dependencies: false
 targets:
   centos-6:
     dependencies:
