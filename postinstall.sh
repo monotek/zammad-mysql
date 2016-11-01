@@ -16,7 +16,7 @@ if [ -f ${ZAMMAD_DIR}/database.yml ]; then
     # db migration
     echo "# database.yml exists. Nothing to do..."
 else
-    DB_PASS="$(apg -x10|head -1)"
+    DB_PASS="$(tr -dc A-Za-z0-9 < /dev/urandom | head -c10)"
 
     if [ -f "${MY_CNF}" ]; then
 	MYSQL_CREDENTIALS="--defaults-file=${MY_CNF}"
