@@ -14,7 +14,6 @@ MY_CNF="/etc/mysql/debian.cnf"
 
 # check if database.yml exists
 if [ -f ${ZAMMAD_DIR}/database.yml ]; then
-    # db migration
     echo "# database.yml exists. Nothing to do..."
 else
     DB_PASS="$(tr -dc A-Za-z0-9 < /dev/urandom | head -c10)"
