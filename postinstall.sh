@@ -37,5 +37,10 @@ else
     mysql ${MYSQL_CREDENTIALS} -e "GRANT ALL PRIVILEGES ON ${DB}.* TO \"${DB_USER}\"@\"${DB_HOST}\"; FLUSH PRIVILEGES;"
 
     # update configfile
-    sed "s/.*password:.*/  password: ${DB_PASS}/" < ${ZAMMAD_MYSQL_DIR}/database.mysql > ${ZAMMAD_MYSQL_DIR}/database.yml
+    echo "updating database.yml"
+    sed -e "s/.*adapter:.*/  adapter: mysql2/" \
+        -e "s/.*username:.*/  username: ${DB_USER}/" \
+        -e  "s/.*password:.*/  password: ${DB_PASS}/" \
+        -e "s/.*database:.*/  database: ${DB}/" < ${ZAMMAD_MYSQL_DIR}/database.yml.dist > ${ZAMMAD_MYSQL_DIR}/database.yml
+
 fi
